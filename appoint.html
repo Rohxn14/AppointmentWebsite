@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APPOINTMENT</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+
+        label {
+            display: inline-block;
+            width: 80px;
+        }
+
+        input, select {
+            width: 120px;
+        }
+        body {
+    font-family: "poppins", sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #47a8e5;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-color: #47a8e5;
+}
+
+button {
+    /* display: block; */
+    width: 100%;
+    padding: 10px;
+    background-color: #47a8e5;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.alert {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.alert.success {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.alert.error {
+    background-color: #f44336;
+    color: #fff;
+}
+.move{
+        color:black;
+        border-radius: 10px;
+        border-color: #47a8e5;
+        text-align: center;
+}
+    </style>
+</head>
+<body>
+    <br>
+    <!-- <br> -->
+    <h1 style="text-align:center;"> <span style="color:#47a8e5;">BOOK</span> APPOINTMENT</h1>
+<div class="move">
+    <label>Name</label><input id="Namebox" type="text" style="width:50%;"><br><br>
+    <label>Select Date</label><input id="Datebox"type="Date" style="width:50%;"><br><br>
+    <label>Timings:</label>
+    <select id="Timebox" style="text-align: center;width:51%;">
+        <option value="9:00 AM">9:00 AM</option>
+        <option value="10:00 AM">10:00 AM</option>
+        <option value="11:00 AM">11:00 AM</option>
+        <option value="12:00 PM">12:00 PM</option>
+        <option value="1:00 ">1:00 PM</option>
+    </select>
+    <br>
+    <label>Phone Number</label><input id="Rollbox" type="number" style="width:50%;"><br><br>
+    <label>Email</label><input id="Mailbox" type="email" style="width:50%;"><br><br>
+    <label>Symptoms</label><input id="Secbox" type="text" style="width:50%;"><br><br>    
+    <label>Gender</label>
+    <select id="Genbox" style="width:51%;text-align: center;">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+    </select>
+    <div class="moves" style="align-content: center;">
+        <button id="Insbtn" style="width:20%;">CONFIRM</button>
+        <button id="Selbtn" style="width:15%;">SELECT</button>
+        <button id="Updbtn"  style="width:20%">POSTPONE</button>
+        <button id="Delbtn" style="width:15%;">CANCEL</button>
+        <br>
+        <br>
+    </div>
+</div>
+ 
+<script type="module">
+    // Function to set the minimum date to today
+    function setMinimumDate() {
+        const dateInput = document.getElementById("Datebox");
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+    }
+
+    // Initial setup
+    setMinimumDate();
+
+    // Periodically update the minimum date every 24 hours
+    setInterval(setMinimumDate, 24 * 60 * 60 * 1000);
+
+    // Your other JavaScript code for handling form actions
+    // ...
+
+</script>
+ <script type="module">
+    // Import the functions you need from the SDKs you need
+     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+apiKey: "AIzaSyAU4p6iC3i-toeKQuKphjLvTb2DH5daMWo",
+authDomain: "appointdata-634dd.firebaseapp.com",
+projectId: "appointdata-634dd",
+storageBucket: "appointdata-634dd.appspot.com",
+messagingSenderId: "958382359072",
+appId: "1:958382359072:web:d828622db24e2a5a5b3245"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+import {getDatabase, ref, get, set, child, update, remove}
+from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js"
+
+const db = getDatabase();
+
+var namebox = document.getElementById("Namebox");
+var datebox=document.getElementById("Datebox");
+var timebox=document.getElementById("Timebox");
+var rollbox = document.getElementById("Rollbox");
+var mailbox= document.getElementById('Mailbox');
+var secbox = document.getElementById("Secbox");
+var genbox = document.getElementById("Genbox");
+
+var insBtn = document.getElementById("Insbtn");
+var selBtn = document.getElementById("Selbtn");
+var updBtn = document.getElementById("Updbtn");
+var delBtn = document.getElementById("Delbtn");
+
+function InsertData() {
+ set(ref(db, "ThePatients/" + namebox.value), {
+     NameOfStd: namebox.value,
+     Date: datebox.value,
+     Time: timebox.value,
+     RollNo: rollbox.value,
+     Email: Mailbox.value,
+     Section: secbox.value,
+     Gender: genbox.value
+ })
+     .then(() => {
+         alert("Data stored successfully");
+     })
+     .catch((error) => {
+         alert("Unsuccessful, error: " + error);
+     });
+}
+
+function SelectData(){
+ const dbref=ref(db);
+
+ get(child(dbref,"ThePatients/"+ namebox.value)).then((snapshot)=>{
+     if(snapshot.exists()){
+         datebox.value=snapshot.val().Date;
+         timebox.value=snapshot.val().Time;
+         rollbox.value= snapshot.val().RollNo;
+         mailbox.value=snapshot.val().Email;
+         secbox.value= snapshot.val().Section;
+         genbox.value= snapshot.val().Gender;
+     }
+
+     else{
+         alert("No data found");
+     }
+ })
+ .catch((error)=>{
+     alert("unsuccessful, error"+error);
+ });
+}
+
+
+function UpdateData(){
+
+ update(ref(db, "ThePatients/" + namebox.value), {
+     NameOfStd: namebox.value,
+     Date: datebox.value,
+     Time: timebox.value,
+     RollNo: rollbox.value,
+     Email: mailbox.value,
+     Section: secbox.value,
+     Gender: genbox.value
+ })
+     .then(() => {
+         alert("Data updated successfully");
+     })
+     .catch((error) => {
+         alert("Unsuccessful, error: " + error);
+     });
+}
+
+
+function DeleteData(){
+ remove(ref(db, "ThePatients/" + namebox.value))
+ .then(() => {
+     alert("Data removed successfully");
+ })
+ .catch((error) => {
+     alert("Unsuccessful, error: " + error);
+ });
+     
+
+
+}
+insBtn.addEventListener('click', InsertData);
+selBtn.addEventListener('click', SelectData);
+updBtn.addEventListener('click', UpdateData);
+delBtn.addEventListener('click', DeleteData);
+
+
+
+
+</script>
+</body>
+</html>

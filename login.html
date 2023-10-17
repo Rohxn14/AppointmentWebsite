@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8">
+
+
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
+
+    /* Style the body */
+  *{
+       font-family: "poppins",sans-serif;
+  }
+body {
+  font-family:"poppins", sans-serif;
+  background-color: #f0f0f0;
+  background-image:url("https://wallpapers.com/images/hd/medical-background-cjge7e89adg6ub8x.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+}
+
+/* Style the container */
+.container {
+
+  background-color:#fff;  
+  background-image: url("https://wallpapers.com/images/hd/medical-background-cjge7e89adg6ub8x.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form group */
+.form-group {
+  padding: 20px;
+}
+
+
+/* Style the form elements */
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #007BFF;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Style the login button */
+#login {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  padding-right: 20px;
+}
+
+/* Style the login button on hover */
+#login:hover {
+  background-color: #0056b3;
+}
+
+/* Style the logo image */
+img {
+  max-width: 100%;
+}
+
+/* Style the "Don't have an account?" link */
+.ask {
+  text-align:center;
+}
+
+
+/* Style the navigation bar */
+.navbar-default {
+  background-color: #007BFF;
+  border: none;
+  border-radius: 0;
+}
+.container{
+  background: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+            backdrop-filter: blur(10px); /* Adds a blur effect to the background */
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            width:100%;
+}
+
+/* Style the navigation bar brand */
+.navbar-brand {
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+}
+
+/* Style the navigation bar links */
+.navbar-nav > li > a {
+  color: white;
+  margin: 0 15px;
+}
+
+/* Style the navigation bar links on hover */
+.navbar-nav > li > a:hover {
+  text-decoration: underline;
+  color: #e5e5e5;
+}
+
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+  <!-- Bootstrap theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>Login</title>
+</head>
+<body >
+
+<div class="navbar navbar-default">
+<div class="navbar-header">
+  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-controls="navbar">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+  </button>
+</div>
+<div class="navbar-collapse collapse"  >
+    <ul class="nav navbar-nav navbar-right">
+         <li><a href="#" id="logout" style="display: none;">Log Out</a></li>
+    </ul>
+</div>
+</div>
+<br>
+<div class="container">  
+
+  </form>
+
+  <div class="col-sm-4">
+  </div>
+  <form name="login_form" id="login_form" method="post" action="#" enctype="multipart/form-data" >
+  <div class="col-sm-4">
+    <div class="form-group">
+        <label for="email" style="color:darkblue;font-size:20px;">Email</label>
+      <input type="text" name="login_email" id="login_email" class="form-control" placeholder="Enter your email">
+    </div>
+    
+    <div class="form-group"  >
+        <label for="password" style="color: darkblue;font-size: 20px;">Password</label>
+      <input type="password" name="login_password" id="login_password" class="form-control"  placeholder="Enter your password">
+    </div>
+
+    <button type="button" id="login" name="login" class="btn btn-success" style="padding:10px;font-size:20px;">Login</button>
+    <div class="ask">
+      <a href="signup.html"  class="si" style="text-align:end;color:darkblue;padding:20px;font-size:15px;width:bold;text-decoration:none;">Don't have an account?<u>Sign Up</u></a>
+   </div>
+  </div><!-- end col -->
+  
+  </div><!--  end row -->    
+  </form>
+</div>
+<br>
+
+  <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+    // Import the functions you need from the SDKs you need
+  //   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+  //   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+  //   import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+    apiKey: "AIzaSyBv2hiaxYWUaadju6nMGLJ9RyV817OnShw",
+    authDomain: "clinic-appointment-693f0.firebaseapp.com",
+    projectId: "clinic-appointment-693f0",
+    storageBucket: "clinic-appointment-693f0.appspot.com",
+    messagingSenderId: "244075100699",
+    appId: "1:244075100699:web:e7e583f404e3c2af41d6be",
+    measurementId: "G-CRMLK6Q57Z"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth();
+    console.log(app);
+
+
+    //----- Login code start    
+    document.getElementById("login").addEventListener("click", function() {
+      var email =  document.getElementById("login_email").value;
+      var password = document.getElementById("login_password").value;
+
+      signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        console.log(user);
+        alert(user.email+" Login successfully!!!");
+        document.getElementById('logout').style.display = 'block';
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        alert(errorMessage);
+      });            
+    });
+    //----- End
+
+    //----- Logout code start    
+    document.getElementById("logout").addEventListener("click", function() {
+      signOut(auth).then(() => {
+        // Sign-out successful.
+        console.log('Sign-out successful.');
+        alert('Sign-out successful.');
+        document.getElementById('logout').style.display = 'none';
+      }).catch((error) => {
+        // An error happened.
+        console.log('An error happened.');
+      });            
+    });
+    //----- End
+
+  </script>
+</body>
+
+</html>
