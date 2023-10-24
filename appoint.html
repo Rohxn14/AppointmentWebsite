@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <title>APPOINTMENT</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
@@ -97,35 +99,43 @@ hr {
     <br>
     <!-- <br> -->
     <h1 style="text-align:center;"> <span style="color:#47a8e5;">BOOK</span> APPOINTMENT</h1>
-<div class="move">
-    <label>Name</label><input id="Namebox" type="text" style="width:50%;"><br><br>
-    <label>Select Date</label><input id="Datebox"type="Date" style="width:50%;"><br><br>
-    <label>Timings:</label>
-    <select id="Timebox" style="text-align: center;width:51%;">
-        <option value="9:00 AM">9:00 AM</option>
-        <option value="10:00 AM">10:00 AM</option>
-        <option value="11:00 AM">11:00 AM</option>
-        <option value="12:00 PM">12:00 PM</option>
-        <option value="1:00 ">1:00 PM</option>
-    </select>
-    <br>
-    <label>Phone Number</label><input id="Rollbox" type="number" style="width:50%;"><br><br>
-    <label>Email</label><input id="Mailbox" type="email" style="width:50%;"><br><br>
-    <label>Symptoms</label><input id="Secbox" type="text" style="width:50%;"><br><br>    
-    <label>Gender</label>
-    <select id="Genbox" style="width:51%;text-align: center;">
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-    </select>
-    <div class="moves" style="align-content: center;">
-        <button id="Insbtn" style="width:20%;">CONFIRM</button>
-        <button id="Selbtn" style="width:15%;">SELECT</button>
-        <button id="Updbtn"  style="width:20%">POSTPONE</button>
-        <button id="Delbtn" style="width:15%;">CANCEL</button>
-        <br>
-        <br>
+    <div class="move">
+        <form action ="https://formspree.io/f/meqbvyez" method="POST">
+
+                <label>Name</label><input id="Namebox" type="text" name="Name" style="width:50%;" required><br><br>
+            <div class="move">
+                <label>Select Date</label><input id="Datebox"type="Date" name="Date" style="width:20%;" required>
+        
+                <label>Timings</label>
+                <select id="Timebox"  name="time" style="text-align: center;width:21%;" required>
+                    <option value="9:00 AM">9:00 AM</option>
+                    <option value="10:00 AM">10:00 AM</option>
+                    <option value="11:00 AM">11:00 AM</option>
+                    <option value="12:00 PM">12:00 PM</option>
+                    <option value="1:00 ">1:00 PM</option>
+                </select>
+            </div>
+                <label>Phone Number</label><input id="Rollbox" name="Number" type="number" style="width:50%;" required><br><br>
+                <label>Email</label><input id="Mailbox"  name="Email" type="email" d  style="width:50%;" required><br><br>
+                <label>Symptoms</label><input id="Secbox" type="text"  name="Symptoms" style="width:50%;" required><br><br>    
+                <label>Gender</label>
+                <select id="Genbox" name="Gender"style="width:51%;text-align: center;"required>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <br>
+                <button type="submit" style="width:31%;" >Send us Mail</button>
+            </form>
+                <div class="moves" style="align-content: center;">
+                    <br>
+                    <button id="Insbtn" style="width:20%;"onclick="InsertData() ">CONFIRM</button>
+                    <button id="Selbtn" style="width:15%;">SELECT</button>
+                    <button id="Updbtn"  style="width:20%">POSTPONE</button>
+                    <button id="Delbtn" style="width:15%;" onclick="DeleteData()">CANCEL</button>
+                    <br>
+                    <br>
+                </div>
     </div>
-</div>
  
 <script type="module">
     // Function to set the minimum date to today
@@ -144,8 +154,6 @@ hr {
     // Your other JavaScript code for handling form actions
     // ...
 
-</script>
- <script type="module">
     // Import the functions you need from the SDKs you need
      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -181,25 +189,59 @@ var insBtn = document.getElementById("Insbtn");
 var selBtn = document.getElementById("Selbtn");
 var updBtn = document.getElementById("Updbtn");
 var delBtn = document.getElementById("Delbtn");
-
 function InsertData() {
- set(ref(db, "ThePatients/" + namebox.value), {
-     NameOfStd: namebox.value,
-     Date: datebox.value,
-     Time: timebox.value,
-     RollNo: rollbox.value,
-     Email: Mailbox.value,
-     Section: secbox.value,
-     Gender: genbox.value
- })
-     .then(() => {
-         alert("Data stored successfully");
-     })
-     .catch((error) => {
-         alert("Unsuccessful, error: " + error);
-     });
-}
+            // Retrieve values from form fields
+            var name = document.getElementById("Namebox").value;
+            var date = document.getElementById("Datebox").value;
+            var time = document.getElementById("Timebox").value;
+            var phone = document.getElementById("Rollbox").value;
+            var email = document.getElementById("Mailbox").value;
+            var symptoms = document.getElementById("Secbox").value;
+            var gender = document.getElementById("Genbox").value;
 
+            // Check if any field is empty
+            if (name === ""  date === ""  time === ""  phone === ""  email === ""  symptoms === ""  gender === "") {
+                alert("Please fill out all sections of the form.");
+            } else {
+                // If all fields are filled, store data in Firebase
+                set(ref(db, "ThePatients/" + name), {
+                    NameOfStd: name,
+                    Date: date,
+                    Time: time,
+                    RollNo: phone,
+                    Email: email,
+                    Section: symptoms,
+                    Gender: gender
+                  
+                })
+                .then(() => {
+                    alert("Data stored successfully");
+                })
+                .catch((error) => {
+                    alert("Unsuccessful, error: " + error);
+                });
+            }
+        }
+
+
+// function InsertData() {
+//  set(ref(db, "ThePatients/" + namebox.value), {
+//      NameOfStd: namebox.value,
+//      Date: datebox.value,
+//      Time: timebox.value,
+//      RollNo: rollbox.value,
+//      Email: Mailbox.value,
+//      Section: secbox.value,
+//      Gender: genbox.value
+//  })
+ 
+//      .then(() => {
+//          alert("Data stored successfully");
+//      })
+//      .catch((error) => {
+//          alert("Unsuccessful, error: " + error);
+//      });
+// }
 function SelectData(){
  const dbref=ref(db);
 
@@ -243,18 +285,24 @@ function UpdateData(){
 }
 
 
-function DeleteData(){
- remove(ref(db, "ThePatients/" + namebox.value))
- .then(() => {
-     alert("Data removed successfully");
- })
- .catch((error) => {
-     alert("Unsuccessful, error: " + error);
- });
-     
+function DeleteData() {
+            // Retrieve the value from the Namebox
+            var name = document.getElementById("Namebox").value;
 
-
-}
+            // Check if the Namebox is empty
+            if (name === "") {
+                alert("Please fill out the Name section of the form.");
+            } else {
+                // If the Namebox is filled, proceed to delete data from Firebase
+                remove(ref(db, "ThePatients/" + name))
+                .then(() => {
+                    alert("Data removed successfully");
+                })
+                .catch((error) => {
+                    alert("Unsuccessful, error: " + error);
+                });
+            }
+        }
 insBtn.addEventListener('click', InsertData);
 selBtn.addEventListener('click', SelectData);
 updBtn.addEventListener('click', UpdateData);
