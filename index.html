@@ -21,18 +21,27 @@
     <a href="#" class="logo"> <i class="fas fa-notes-medical"></i> <strong>RP</strong>medical </a>
 
     <nav class="navbar">
-        <a href="#home" style="color:white">home</a>
+        <a href="#home">home</a>
         <a href="#about">about</a>
         <a href="#services">services</a>
         <a href="#doctors">doctor</a>
         <a href="#revp">Reviews</a>
-        <a href="appoint.html">appointment</a>
-        <a href="login.html">Login</a>
+        <a href="login.html"> appointment</a>
+        <!-- <a href="login.html">Login</a> -->
+        
     </nav>
 
     <div id="menu-btn" class="fas fa-bars"></div>
 
 </header>
+<div class="mobile-menu">
+    <a href="#home" style="color: #fff;margin-right:10px;">home</a>
+    <a href="#about"  style="color: #fff;margin-right:10px;">about</a>
+    <a href="#services"  style="color: #fff;margin-right:10px;">services</a>
+    <a href="#doctors"  style="color: #fff;margin-right:10px;">doctor</a>
+    <a href="#revp"  style="color: #fff;margin-right:10px;">Reviews</a>
+    <a href="login.html"  style="color: #fff;margin-right:10px;"> appointment</a>
+</div>
 
 <!-- header section ends -->
 
@@ -41,7 +50,7 @@
 <section class="home" id="home">
 
     <div class="image">
-        <img src="homes3.jpg" alt="Home Image" height="500" style="border-radius: 20px;">
+        <img src="images/homes3.jpg" alt="Home Image" height="500" style="border-radius: 20px;">
     </div>
 
     <div class="content">
@@ -53,7 +62,7 @@
             Our platform ensures a seamless experience for patients, providing detailed doctor information, appointment slots, and secure record-keeping.
             
             Join us in prioritizing your health and well-being. 
-       </p>        <a href="appoint.html" class="btn">Book Appointment <span class="fas fa-chevron-right"></span> </a>
+       </p>        <a href="login.html" class="btn">Book Appointment <span class="fas fa-chevron-right"></span> </a>
     </div>
 
 </section>
@@ -101,7 +110,7 @@
     <div class="row">
 
         <div class="image">
-            <img src="docimage.jpg" height="450" style="border-radius: 30px;" alt="">
+            <img src="images/docimage.jpg" height="450" style="border-radius: 30px;" alt="">
         </div>
 
         <div class="content">
@@ -370,32 +379,34 @@
 
 <section class="footer"  >
     <footer>
-        <div class="footer-content">
-          <div class="footer-logo">
-            <img src="https://cdn-icons-png.flaticon.com/128/10249/10249872.png" alt="Clinic Logo" />
-          </div>
-          <div class="footer-links">
+        <section class="footer_content">
+            <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://cdn-icons-png.flaticon.com/128/10249/10249872.png" alt="Clinic Logo" />
+            </div>
+            <div class="footer-links">
+                <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <p>Contact Us:</p>
+                <p>Email: contact@clinic.com</p>
+                <p>Phone: +1 123-456-7890</p>
+            </div>
+            </div>
+            <div class="footer-social">
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Contact</a></li>
+                <li><a href="https://www.facebook.com"><img src="https://cdn-icons-png.flaticon.com/128/733/733547.png" alt="Facebook"></a></li>
+                <li><a href="https://www.twitter.com"><img src="https://cdn-icons-png.flaticon.com/128/2504/2504947.png" alt="Twitter"></a></li>
+                <li><a href="https://www.instagram.com"><img src="https://cdn-icons-png.flaticon.com/128/1384/1384063.png" alt="Instagram"></a></li>
             </ul>
-          </div>
-          <div class="footer-contact">
-            <p>Contact Us:</p>
-            <p>Email: contact@clinic.com</p>
-            <p>Phone: +1 123-456-7890</p>
-          </div>
-        </div>
-        <div class="footer-social">
-          <ul>
-            <li><a href="https://www.facebook.com"><img src="https://cdn-icons-png.flaticon.com/128/733/733547.png" alt="Facebook"></a></li>
-            <li><a href="https://www.twitter.com"><img src="https://cdn-icons-png.flaticon.com/128/2504/2504947.png" alt="Twitter"></a></li>
-            <li><a href="https://www.instagram.com"><img src="https://cdn-icons-png.flaticon.com/128/1384/1384063.png" alt="Instagram"></a></li>
-          </ul>
-        </div>
-      </footer>
+            </div>
+    </section>
+    </footer>
       
 
 </section>
@@ -411,8 +422,40 @@
 
 // Function to add an appointment
 
+    
+<script>
+    // JavaScript to toggle the mobile menu
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.querySelector('.mobile-menu');
 
+menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+});
+
+// Check if the current page is the home page (index.html)
+
+    // Function to get URL parameters
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+      var results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+var name = localStorage.getItem("name");
+
+if (name) {
+  document.getElementById('user-greeting').textContent = 'Welcome, ' + name;
+}
+  
+    // Get the 'name' parameter from the URL
+    // const name = getUrlParameter('name');
+    // if (name) {
+    //   document.getElementById('user-greeting').textContent = 'Welcome, ' + name;
+    // }
 </script>
+  
+
+
 
 </body>
 </html>
