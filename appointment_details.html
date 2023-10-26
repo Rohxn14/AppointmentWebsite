@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Details</title>
+    <!-- Add your CSS styles here -->
+    <style>
+        /* Styles for appointment_details.html */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;
+}
+
+h1 {
+    color: #47a8e5;
+    font-size: 24px;
+    margin-top: 0;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #47a8e5;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2a7da6;
+}
+
+/* Additional styling as needed */
+
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Appointment Details</h1>
+    <div class="container">
+        <form action ="https://formspree.io/f/meqbvyez" method="POST">
+            <label>Name:</label>
+            <input id="Namebox" type="text" name="Name" style="width:49.5%;border-color: #47a8e5;border: radius 10px;" readonly>
+            <br><br>
+            <label>Date:</label>
+            <input id="Datebox" type="text" name="Date" style="width:50%;border-color: #47a8e5;border: radius 10px;" readonly>
+            <br><br>
+            <label>Time:</label>
+            <input id="Timebox" type="text" name="Time" style="width:50%;border-color: #47a8e5;border: radius 10px;" readonly>
+            <br><br>
+            <label>Number:</label>
+            <input id="Rollbox" type="text" name="Number" style="width:48%;border-color: #47a8e5;border: radius 10px;" readonly>
+            <br><br>
+            <label>Email:</label>
+            <input id="Mailbox" type="text" name="Email" style="width:50%;border-color: #47a8e5;border: radius 10px;" readonly>
+            <br><br>
+            <label>Symptoms:</label>
+            <input id="Secbox" type="text" name="Symptoms" style="width:46.5%;border-color: #47a8e5;border: radius 10px;" readonly>
+            <br><br>
+            <label>Gender:</label>
+            <input id="Genbox" type="text" name="Gender" style="width:50%;border-color: #47a8e5;border: radius 10px;" readonly>
+            <br><br>
+            <!-- <button type="submit" style="width:31%;" >Send us Mail</button> -->
+            <button id="confirmBtn" style="width: 30%;">Confirm</button>
+
+            <br>
+        </form>
+        <br>
+        <button id="postponeBtn" style="width:30%">Postpone</button>
+        <button id="cancelBtn" style="width: 30%;">Cancel</button>
+        <button id="logoutBtn" style="width: 30%;">Logout</button>
+
+    </div>
+
+    <script>
+        
+        // Function to get URL parameters by name
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Retrieve URL parameters
+        var name = getParameterByName('name');
+        var date = getParameterByName('date');
+        var time = getParameterByName('time');
+        var phone = getParameterByName('phone');
+        var email = getParameterByName('email');
+        var symptoms = getParameterByName('symptoms');
+        var gender = getParameterByName('gender');
+
+        // Populate the form fields with the retrieved data
+        document.getElementById('Namebox').value = name;
+        document.getElementById('Datebox').value = date;
+        document.getElementById('Timebox').value = time;
+        document.getElementById('Rollbox').value = phone;
+        document.getElementById('Mailbox').value = email;
+        document.getElementById('Secbox').value = symptoms;
+        document.getElementById('Genbox').value = gender;
+
+
+        document.getElementById('confirmBtn').addEventListener('click', function() {
+            // Add your code to book the appointment here
+            alert('Appointment booked!');
+
+        });
+
+        document.getElementById('postponeBtn').addEventListener('click', function() {
+            // Redirect back to the "appoint.html" page
+            window.location.href = 'appoint.html';
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', function() {
+            // Clear the data and redirect to the "index.html" page
+            // Add your code to clear data here
+            document.getElementById('cancelBtn').addEventListener('click', function() {
+            // Clear the data and redirect to the "index.html" page
+            document.querySelector('form').reset();  // This line clears the form
+            window.location.href = 'index.html';
+});
+
+            window.location.href = 'index.html';
+        });
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+        // Redirect to the "index.html" page
+        window.location.href = 'index.html';
+    });
+    </script>
+<!-- <script>
+            // Your JavaScript code here
+
+            // When the "Confirm" button is clicked, show an alert and submit the form
+            document.getElementById('confirmBtn').addEventListener('click', function () {
+                // Display an alert
+                alert('Appointment booked!');
+
+                // Trigger the form submission
+                document.querySelector('form').submit();
+            });
+
+            // Other event listeners for postpone and cancel buttons
+</script> -->
+</body>
+</html>
