@@ -11,11 +11,11 @@
 
         label {
             display: inline-block;
-            width: 80px;
+            max-width: 80px;
         }
 
         input, select {
-            width: 120px;
+            max-width: 120px;
         }
         body {
     font-family: "poppins", sans-serif;
@@ -35,13 +35,13 @@
 
 label {
     display: inline-block;
-    width: 100px;
+    max-width: 100px;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
 input, select {
-    width: 100%;
+    max-width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -51,7 +51,7 @@ input, select {
 
 button {
     /* display: block; */
-    width: 100%;
+    max-width: 100%;
     padding: 10px;
     background-color: #47a8e5;
     color: #fff;
@@ -100,38 +100,41 @@ hr {
     <!-- <br> -->
     <h1 style="text-align:center;"> <span style="color:#47a8e5;">BOOK</span> APPOINTMENT</h1>
     <div class="move">
-        <form action ="https://formspree.io/f/meqbvyez" method="POST">
 
-                <label>Name</label><input id="Namebox" type="text" name="Name" style="width:50%;" required><br><br>
-            <div class="move">
-                <label>Select Date</label><input id="Datebox"type="Date" name="Date" style="width:20%;" required>
-        
-                <label>Timings</label>
-                <select id="Timebox"  name="time" style="text-align: center;width:21%;" required>
-                    <option value="9:00 AM">9:00 AM</option>
-                    <option value="10:00 AM">10:00 AM</option>
-                    <option value="11:00 AM">11:00 AM</option>
-                    <option value="12:00 PM">12:00 PM</option>
-                    <option value="1:00 ">1:00 PM</option>
-                </select>
-            </div>
-                <label>Phone Number</label><input id="Rollbox" name="Number" type="number" style="width:50%;" required><br><br>
-                <label>Email</label><input id="Mailbox"  name="Email" type="email" d  style="width:50%;" required><br><br>
-                <label>Symptoms</label><input id="Secbox" type="text"  name="Symptoms" style="width:50%;" required><br><br>    
-                <label>Gender</label>
-                <select id="Genbox" name="Gender"style="width:51%;text-align: center;"required>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-                <br>
-                <button type="submit" style="width:31%;" >Send us Mail</button>
+            <form action ="https://formspree.io/f/meqbvyez" method="POST">
+
+                    <label></label><input id="Namebox" type="text" name="Name" style="width:50%;"  placeholder="Name" oninvalid="this.setCustomValidity('Please fill out this field.')" required><br><br>
+                <div class="move">
+                    <label></label><input id="Datebox"type="Date" name="Date" style="width:22%;margin-left:15%;"  required>
+            
+                    <label>Time:</label>
+                    <select id="Timebox"     name="time" style="text-align: center;width:22.5%;margin-right:15%;" required>
+                        <option value="9:00 AM">9:00 AM</option>
+                        <option value="10:00 AM">10:00 AM</option>
+                        <option value="11:00 AM">11:00 AM</option>
+                        <option value="12:00 PM">12:00 PM</option>
+                        <option value="1:00 ">1:00 PM</option>
+                    </select>
+                </div><br>
+                    <label></label><input id="Rollbox" name="Number" type="number" style="width:50%;" placeholder="Number" required><br><br>
+                    <label></label><input id="Mailbox"  name="Email" type="email" d  style="width:50%;" placeholder="Email"required><br><br>
+                    <label></label><input id="Secbox" type="text"  name="Symptoms" style="width:50%;" placeholder="Symptoms"><br><br>    
+                    <label></label>
+                    <select id="Genbox" name="Gender"style="width:51%;text-align: center;"required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    
+                    <br>
+                    <!-- <button type="submit" style="width:31%;" >Send us Mail</button> -->
             </form>
+
                 <div class="moves" style="align-content: center;">
                     <br>
-                    <button id="Insbtn" style="width:20%;"onclick="InsertData() ">CONFIRM</button>
-                    <button id="Selbtn" style="width:15%;">SELECT</button>
+                    <button id="Insbtn" style="width:20%;"onclick="InsertData()">PROCEED</button>
+                    <!-- <button id="Selbtn" style="width:15%;">SELECT</button>
                     <button id="Updbtn"  style="width:20%">POSTPONE</button>
-                    <button id="Delbtn" style="width:15%;" onclick="DeleteData()">CANCEL</button>
+                    <button id="Delbtn" style="width:15%;" onclick="DeleteData()" >CANCEL</button> -->
                     <br>
                     <br>
                 </div>
@@ -189,39 +192,52 @@ var insBtn = document.getElementById("Insbtn");
 var selBtn = document.getElementById("Selbtn");
 var updBtn = document.getElementById("Updbtn");
 var delBtn = document.getElementById("Delbtn");
-function InsertData() {
-            // Retrieve values from form fields
-            var name = document.getElementById("Namebox").value;
-            var date = document.getElementById("Datebox").value;
-            var time = document.getElementById("Timebox").value;
-            var phone = document.getElementById("Rollbox").value;
-            var email = document.getElementById("Mailbox").value;
-            var symptoms = document.getElementById("Secbox").value;
-            var gender = document.getElementById("Genbox").value;
+// function InsertData() {
+//             // Retrieve values from form fields
+//             var name = document.getElementById("Namebox").value;
+//             var date = document.getElementById("Datebox").value;
+//             var time = document.getElementById("Timebox").value;
+//             var phone = document.getElementById("Rollbox").value;
+//             var email = document.getElementById("Mailbox").value;
+//             var symptoms = document.getElementById("Secbox").value;
+//             var gender = document.getElementById("Genbox").value;
 
-            // Check if any field is empty
-            if (name === ""  date === ""  time === ""  phone === ""  email === ""  symptoms === ""  gender === "") {
-                alert("Please fill out all sections of the form.");
-            } else {
-                // If all fields are filled, store data in Firebase
-                set(ref(db, "ThePatients/" + name), {
-                    NameOfStd: name,
-                    Date: date,
-                    Time: time,
-                    RollNo: phone,
-                    Email: email,
-                    Section: symptoms,
-                    Gender: gender
+//             // Check if any field is empty
+//             if (name === "" || date === "" || time === "" || phone === "" || email === "" || symptoms === "" || gender === "") {
+//                 alert("Please fill out all sections of the form.");
+//             } else {
+//                 // If all fields are filled, store data in Firebase
+                
+//                 set(ref(db, "ThePatients/" + name), {
+//                     NameOfStd: name,
+//                     Date: date,
+//                     Time: time,
+//                     RollNo: phone,
+//                     Email: email,
+//                     Section: symptoms,
+//                     Gender: gender
                   
-                })
-                .then(() => {
-                    alert("Data stored successfully");
-                })
-                .catch((error) => {
-                    alert("Unsuccessful, error: " + error);
-                });
-            }
-        }
+//                 })
+//                 .then(() => {
+//                     alert("Data stored successfully");
+//                 })
+//                 .catch((error) => {
+//                     alert("Unsuccessful, error: " + error);
+//                 });
+//                 var url = 'appointment_details.html' +
+//             '?name=' + encodeURIComponent(name) +
+//             '&date=' + encodeURIComponent(date) +
+//             '&time=' + encodeURIComponent(time) +
+//             '&phone=' + encodeURIComponent(phone) +
+//             '&email=' + encodeURIComponent(email) +
+//             '&symptoms=' + encodeURIComponent(symptoms) +
+//             '&gender=' + encodeURIComponent(gender);
+
+//         // Navigate to the appointment_details.html page with data parameters
+//         window.location.href = url;
+
+//             }
+//         }
 
 
 // function InsertData() {
@@ -242,6 +258,72 @@ function InsertData() {
 //          alert("Unsuccessful, error: " + error);
 //      });
 // }
+function InsertData() {
+    // Retrieve values from form fields
+    var name = namebox.value;
+    var date = datebox.value;
+    var time = timebox.value;
+    var phone = rollbox.value;
+    var email = mailbox.value;
+    var symptoms = secbox.value;
+    var gender = genbox.value;
+
+    // Check if any field is empty
+    if (name === "" || date === "" || time === "" || phone === "" || email === "" || symptoms === "" || gender === "") {
+        alert("Please fill out all sections of the form.");
+    } else if (!isValidPhoneNumber(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+    } else if (!isValidEmail(email)) {
+        alert("Please enter a valid email address.");
+    } else {
+        // If all fields are filled and the phone and email are valid, store data in Firebase
+        set(ref(db, "ThePatients/" + name), {
+            NameOfStd: name,
+            Date: date,
+            Time: time,
+            RollNo: phone,
+            Email: email,
+            Section: symptoms,
+            Gender: gender
+        })
+        .then(() => {
+            alert("Click 'OK' to proceed.");
+
+            // Redirect to appointment_details.html with URL parameters
+            var url = 'appointment_details.html' +
+                '?name=' + encodeURIComponent(name) +
+                '&date=' + encodeURIComponent(date) +
+                '&time=' + encodeURIComponent(time) +
+                '&phone=' + encodeURIComponent(phone) +
+                '&email=' + encodeURIComponent(email) +
+                '&symptoms=' + encodeURIComponent(symptoms) +
+                '&gender=' + encodeURIComponent(gender);
+
+            // Navigate to the appointment_details.html page with data parameters
+            window.location.href = url;
+        })
+        .catch((error) => {
+            alert("Unsuccessful, error: " + error);
+        });
+    }
+}
+
+function isValidPhoneNumber(phone) {
+    // Use a regular expression to validate a 10-digit phone number
+    var phoneRegex = /^\d{10}$/;
+    return phoneRegex.test(phone);
+}
+
+function isValidEmail(email) {
+    // Use a regular expression to validate an email address
+    var emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+    return emailRegex.test(email);
+}
+
+
+
+
+
 function SelectData(){
  const dbref=ref(db);
 
