@@ -8,103 +8,169 @@
     <link rel="icon" href="img/li.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" ></script>
-    <style>
-        /*body{
+<style>
+            /*body{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                width: 100vw;
+                margin: 0px;
+            }*/
+
+        body {
+            background-image: url('img/lb.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
-            width: 100vw;
-            margin: 0px;
-        }*/
+        }
 
-    body {
-        background-image: url('img/lb.jpg');
-        background-size: cover;
-        background-position: center;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
+        .container {
+            padding: 3rem;
+            max-width: 350px;
+            position: relative;
+            background-color:#47a8e5;
+            border-radius: 30px;
+            border:none;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #222;
+        }
+        h3{
+            color:white;
+        }
+        label{
+            color: white;
+        }
+
+        p {
+            font-size: 18px;
+            color:white;
+        }
+
+        /* Style your sign-up form or content here */
+
+        /* Example form input style */
+        input {
+            max-width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: white;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Style links */
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        .custom-control:hover{
+            color: chocolate;
+
+        }
+        .section{
+            padding:1rem;
+        }
+        .h1{
+            padding:1rem;
+        }
+        /* Hide the scrollbar track */
+    ::-webkit-scrollbar {
+    width: 8px;
     }
 
-    .container {
-        padding: 3rem;
-        max-width: 350px;
-        position: relative;
-        background-color:rgba(0,0,0,0.6);
-        border-radius: 30px;
-        border:none;
-        text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Customize the scrollbar thumb */
+    ::-webkit-scrollbar-thumb {
+    background: #888;
     }
 
-    h1 {
-        font-size: 36px;
-        color: #333;
-    }
-    h3{
-        color: yellow;
-    }
-    label{
-        color: chocolate;
-    }
-
-    p {
-        font-size: 18px;
-        color: #555;
-    }
-
-    /* Style your sign-up form or content here */
-
-    /* Example form input style */
-    input {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    button {
-        background-color: #007BFF;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-
-    /* Style links */
-    a {
-        color: #007BFF;
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-    .custom-control:hover{
-        color: chocolate;
-
+    /* Customize the scrollbar track */
+    ::-webkit-scrollbar-track {
+    background: #f1f1f1;
     }
 
 
-    </style>
+    @media (min-width: 219px) and (max-width: 480px) 
+    {
+        p{
+            text-align:center;
+            padding:0 1em;
+            line-height:0.5;
+            text-shadow: #444;
+        }
+        .section{
+        padding:0 1.5em;
+        }
+        .footer{
+        padding:0 1.5em;
+        padding-bottom: 100px;
+        }
+        h1{
+            text-align: center;
+        }
+        body {
+        text-rendering: optimizeLegibility;
 
+        };
+        html {
+        scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar {
+        width: 8px;
+        }
+
+        /* Customize the scrollbar thumb */
+        ::-webkit-scrollbar-thumb {
+        background: #888;
+        }
+
+        /* Customize the scrollbar track */
+        ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        }
+
+    }
+
+</style>
+<style>
+    
+</style>
 </head>
 
 <body>
+  <header>
+    <h1 style="color: #47a8e5;">Login to Book <span style="color:black">Appointment</span></h1>
+  </header>
     <div class="mb-5 container">
-        <h3 class="mb-3">Log In</h3>
+        <h3 class="mb-3">Login</h3>
         
         <input type="text" placeholder="Username" id="userInp" class="form-control mb-3">
         
@@ -114,8 +180,8 @@
             <label class="custom-control-label" for="customSwitch1">Keep me Logged In</label>
         </div>
 
-        <button type="text" id="sub_btn" class="btn w-100 btn-outline-primary mb-3">Log In</button>
-        <a href="register.html" class="badge badge-secondary py-1 w-100">Want to create an Account?</a>
+        <button type="text" id="sub_btn" class="btn w-100 btn-outline-primary mb-3" style="color:#47a8e5;background-color:white ;">Login</button>
+        <a href="register.html" class="badge badge-secondary py-1 w-100"  style="background-color:#47a8e5;">Want to create an Account?<u>Sign Up</u></a>
     </div>
 
 
@@ -184,13 +250,13 @@
 
             if(!keepLoggedIn){
                 sessionStorage.setItem('user',JSON.stringify(user));
-                window.location="home.html";
+                window.location="appoint.html";
             }
 
             else{
                 localStorage.setItem('keepLoggedIn','yes');
                 localStorage.setItem('user',JSON.stringify(user));
-                window.location="appointment.html";
+                window.location="appoint.html";
             }
         }
 
