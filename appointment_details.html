@@ -67,7 +67,7 @@ button:hover {
 <body>
     <h1 style="text-align:center;">Appointment Details</h1>
     <div class="container">
-        <form action ="https://formspree.io/f/meqbvyez" method="POST">
+        <form action ="https://formspree.io/f/mrgwjrlo" method="POST">
             <label>Name:</label>
             <input id="Namebox" type="text" name="Name" style="width:49.5%;border-color: #47a8e5;border: radius 10px;" readonly>
             <br><br>
@@ -94,6 +94,12 @@ button:hover {
 
             <br>
         </form>
+        <div id="custom-popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5);">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); text-align: center;">
+                <p>Appointment booked!</p>
+                <!-- <button id="ok-button" style="padding: 10px 20px; background-color: #47a8e5; color: #fff; border: none; border-radius: 3px; cursor: pointer;">OK</button> -->
+            </div>
+        </div>
         <br>
         <button id="postponeBtn" style="width:30%">Postpone</button>
         <button id="cancelBtn" style="width: 30%;">Cancel</button>
@@ -134,10 +140,22 @@ button:hover {
 
 
         document.getElementById('confirmBtn').addEventListener('click', function() {
-            // Add your code to book the appointment here
-            alert('Appointment booked!');
+    // Display the custom popup
+    var customPopup = document.getElementById('custom-popup');
+    customPopup.style.display = 'block';
 
-        });
+    // Handle the OK button click in the custom popup
+    document.getElementById('ok-button').addEventListener('click', function() {
+        // Add your code to book the appointment here
+
+        // Hide the custom popup
+        customPopup.style.display = 'none';
+
+        // Redirect or perform any other actions as needed
+        // You can use window.location.href to navigate to another page, for example:
+        // window.location.href = 'index.html';
+    });
+});
 
         document.getElementById('postponeBtn').addEventListener('click', function() {
             // Redirect back to the "appoint.html" page
