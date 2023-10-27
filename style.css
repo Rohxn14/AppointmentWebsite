@@ -359,6 +359,7 @@ footer {
   margin: 5px 0;
 }
 
+
 .footer-social ul {
   list-style: none;
   padding: 0;
@@ -394,8 +395,8 @@ body {
   border-radius: 8px;
   padding: 20px;
   flex: 1;
-  margin-right: 20px;
   transition: transform 0.2s;
+  margin: bottom 20px;
 }
 
 .review:last-child {
@@ -602,30 +603,6 @@ button:hover {
   }
 }
   @media (min-width: 319px) and (max-width: 480px) {
- 
-     .rev{
-        max-width:100%;
-        padding:0 0.5em;
-     }
-     .reviews{
-         max-width:150%;
-         text-align: justify;
-
-     }    
-     .review{
-       max-width:31%;
-       text-align: justify;
-     }
-     h3{
-           text-align:justify;
-     }
-     image{
-            display:block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 50px;
-            padding:0 1rem;
-     }
      p{
         text-align:center;
         /* padding:0 1em; */
@@ -633,14 +610,30 @@ button:hover {
         text-shadow: #444;
      }
      .section{
-      padding:1rem;
+      padding:0 5rem;
      }
-     .footer{
-       padding:1em;
-     }
+       .reviews {
+    flex-direction: column; /* Stack reviews vertically */
+  }
+
+  .review {
+    margin-right: 0; /* No margin on mobile */
+    margin-bottom: 20px; /* Add some margin between reviews */
+    transition: transform 0.2s;
 
 
   }
+  .footer-contact p{
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding-left:15px;
+  }
+  .image img{
+    max-height:300px; /* Adjust the image size for mobile devices */
+}
+
+  
+}
   @media (min-width: 481px) and (max-width: 1200px) {
     .rev{
        max-width:100%;
