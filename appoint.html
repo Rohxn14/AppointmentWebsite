@@ -93,12 +93,30 @@ hr {
         border-color: #47a8e5;
         text-align: center;
 }
+/* Add this CSS to style the custom popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup.active {
+    display: block;
+}
+
     </style>
 </head>
 <body>
     <br>
     <!-- <br> -->
-    <h1 style="text-align:center;"> <span style="color:#47a8e5;">BOOK</span> APPOINTMENT</h1>
+    <h1 style="text-align:center;"> <span style="color:#47a8e5;">BOOK</span>APPOINTMENT</h1>
     <div class="move">
 
             <form action ="https://formspree.io/f/meqbvyez" method="POST">
@@ -138,9 +156,15 @@ hr {
                     <br>
                     <br>
                 </div>
+                <div id="custom-popup" class="popup">
+                    <p>Click 'OK' to proceed.</p>
+                    <button id="ok-button">OK</button>
+                </div>
     </div>
- 
-<script type="module">
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="module" >
     // Function to set the minimum date to today
     function setMinimumDate() {
         const dateInput = document.getElementById("Datebox");
@@ -192,72 +216,6 @@ var insBtn = document.getElementById("Insbtn");
 var selBtn = document.getElementById("Selbtn");
 var updBtn = document.getElementById("Updbtn");
 var delBtn = document.getElementById("Delbtn");
-// function InsertData() {
-//             // Retrieve values from form fields
-//             var name = document.getElementById("Namebox").value;
-//             var date = document.getElementById("Datebox").value;
-//             var time = document.getElementById("Timebox").value;
-//             var phone = document.getElementById("Rollbox").value;
-//             var email = document.getElementById("Mailbox").value;
-//             var symptoms = document.getElementById("Secbox").value;
-//             var gender = document.getElementById("Genbox").value;
-
-//             // Check if any field is empty
-//             if (name === "" || date === "" || time === "" || phone === "" || email === "" || symptoms === "" || gender === "") {
-//                 alert("Please fill out all sections of the form.");
-//             } else {
-//                 // If all fields are filled, store data in Firebase
-                
-//                 set(ref(db, "ThePatients/" + name), {
-//                     NameOfStd: name,
-//                     Date: date,
-//                     Time: time,
-//                     RollNo: phone,
-//                     Email: email,
-//                     Section: symptoms,
-//                     Gender: gender
-                  
-//                 })
-//                 .then(() => {
-//                     alert("Data stored successfully");
-//                 })
-//                 .catch((error) => {
-//                     alert("Unsuccessful, error: " + error);
-//                 });
-//                 var url = 'appointment_details.html' +
-//             '?name=' + encodeURIComponent(name) +
-//             '&date=' + encodeURIComponent(date) +
-//             '&time=' + encodeURIComponent(time) +
-//             '&phone=' + encodeURIComponent(phone) +
-//             '&email=' + encodeURIComponent(email) +
-//             '&symptoms=' + encodeURIComponent(symptoms) +
-//             '&gender=' + encodeURIComponent(gender);
-
-//         // Navigate to the appointment_details.html page with data parameters
-//         window.location.href = url;
-
-//             }
-//         }
-
-
-// function InsertData() {
-//  set(ref(db, "ThePatients/" + namebox.value), {
-//      NameOfStd: namebox.value,
-//      Date: datebox.value,
-//      Time: timebox.value,
-//      RollNo: rollbox.value,
-//      Email: Mailbox.value,
-//      Section: secbox.value,
-//      Gender: genbox.value
-//  })
- 
-//      .then(() => {
-//          alert("Data stored successfully");
-//      })
-//      .catch((error) => {
-//          alert("Unsuccessful, error: " + error);
-//      });
-// }
 function InsertData() {
     // Retrieve values from form fields
     var name = namebox.value;
@@ -270,11 +228,24 @@ function InsertData() {
 
     // Check if any field is empty
     if (name === "" || date === "" || time === "" || phone === "" || email === "" || symptoms === "" || gender === "") {
-        alert("Please fill out all sections of the form.");
+        // alert("Please fill out all sections of the form.");
+        Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please fill out all sections of the form.',
+    });
     } else if (!isValidPhoneNumber(phone)) {
-        alert("Please enter a valid 10-digit phone number.");
+        Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please enter a valid 10-digit phone number.',
+    });
     } else if (!isValidEmail(email)) {
-        alert("Please enter a valid email address.");
+        Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Please enter a valid email address.',
+    });
     } else {
         // If all fields are filled and the phone and email are valid, store data in Firebase
         set(ref(db, "ThePatients/" + name), {
@@ -287,24 +258,34 @@ function InsertData() {
             Gender: gender
         })
         .then(() => {
-            alert("Click 'OK' to proceed.");
+    // Show the custom popup
+    document.getElementById('custom-popup').classList.add('active');
+    // Disable scrolling on the background content
+    document.body.style.overflow = 'hidden';
 
-            // Redirect to appointment_details.html with URL parameters
-            var url = 'appointment_details.html' +
-                '?name=' + encodeURIComponent(name) +
-                '&date=' + encodeURIComponent(date) +
-                '&time=' + encodeURIComponent(time) +
-                '&phone=' + encodeURIComponent(phone) +
-                '&email=' + encodeURIComponent(email) +
-                '&symptoms=' + encodeURIComponent(symptoms) +
-                '&gender=' + encodeURIComponent(gender);
+    // Add a click event listener to the OK button
+    document.getElementById('ok-button').addEventListener('click', function() {
+        // Enable scrolling on the background content
+        document.body.style.overflow = 'auto';
 
-            // Navigate to the appointment_details.html page with data parameters
-            window.location.href = url;
-        })
-        .catch((error) => {
-            alert("Unsuccessful, error: " + error);
-        });
+        // Hide the custom popup
+        document.getElementById('custom-popup').classList.remove('active');
+
+        // Redirect to appointment_details.html with URL parameters
+        var url = 'appointment_details.html' +
+            '?name=' + encodeURIComponent(name) +
+            '&date=' + encodeURIComponent(date) +
+            '&time=' + encodeURIComponent(time) +
+            '&phone=' + encodeURIComponent(phone) +
+            '&email=' + encodeURIComponent(email) +
+            '&symptoms=' + encodeURIComponent(symptoms) +
+            '&gender=' + encodeURIComponent(gender);
+
+        // Navigate to the appointment_details.html page with data parameters
+        window.location.href = url;
+    });
+})
+
     }
 }
 
